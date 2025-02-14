@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="pngtree-red-heart-icon-isolated-png-image_1726594.jpg" type="image/x-icon">
+    <title>FOR THẢO VY</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+        }
+        #c {
+            background-color: #ffffff;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        #btn {
+            height: 55px;
+            width: 75px;
+            cursor: pointer;
+            background-color: #ce4f6a00;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s ease;
+        }
+
+        #btnYes,
+        #btnNo {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ce4f6a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1,
+        p {
+            transition: opacity 0.3s ease;
+            font-family: 'Times New Roman', 'Arial', sans-serif;
+            color: #b43737;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            opacity: 1;
+        }
+
+        #btn img {
+            width: 60px;
+            height: 40px;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                transform: translateX(5px);
+            }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        #btn:hover,
+        #btnYes:hover,
+        #btnNo:hover {
+            background-color: #d37da8;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        #btn:active,
+        #btnYes:active,
+        #btnNo:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            display: none;
+            font-size: 20px;
+            margin: 10px;
+            padding: 30px;
+            border: 2px solid #f19fb3;
+            color: #ce4f6a;
+            border-radius: 8px;
+            background-color: #ffffff;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            overflow: hidden;
+            word-wrap: break-word;
+            transform: perspective(500px) rotateY(10deg);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .message.show {
+            transform: perspective(500px) rotateY(0deg);
+        }
+
+        .div-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            max-width: 100%;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .message-text {
+            font-size: 18px;
+            display: block;
+            padding: 30px;
+            border: 2px solid #f19fb3;
+            border-radius: 10px;
+            background-color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            transform: perspective(500px) rotateY(10deg);
+            transition: all 0.3s ease-in-out;
+            color: #ce4f6a;
+                }
+
+        .message-text.show {
+            transform: perspective(500px) rotateY(0deg);
+        }
+        .footer {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ce4f6a;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px 0;
+            z-index: 100;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer span {
+            color: #d37da8;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="c" width="948" height="586"></canvas>
+
+        <h1 id="messageTitle">Bạn có tin nhắn mới</h1>
+        <p id="messageText">(Bấm vào bức thư đi)</p>
+        <button id="btn">
+            <img src="./letters.png" alt="Description">
+        </button>
+        <div class="message">Hiiiii</div>
+        <div class="message">Hôm nay là Valentine á</div>
+        <div class="message">và đây cũng là lần đầu tiên tui tặng quà cho người khác trong ngày này</div>
+        <div class="message">nên tui không biết tặng gì cho Thảo Vy hết</div>
+        <div class="message">chỉ có lá thư này thoiii</div>
+        <div class="message">Mặc dù tui bt là những điều trong này tui nên nói trực tiếp mới đúng</div>
+        <div class="message">nhưng mà tui bị ngại á hehe thông cảm nhaaaa</div>
+        <div class="message">Thì bạn đã biết là tui thích bạn rồi đúng hong</div>
+        <div class="message">và tui đoán là Thảo Vy chỉ coi tui như một người bạn mà thoii</div>
+        <div class="message">Nhma Thảo Vy có thể cho tui cơ hội....</div>
+        <div class="message">làm người iu bạn đc hongg👉👈</div>
+        <div class="message">Tui muốn được quan tâm Thảo Vy mọi lúc mà không cảm thấy mình bị phiền</div>
+        <div class="message">muốn cùng bạn chia sẻ và trải qua mọi điều trong cuộc sống hàng ngày</div>
+        <div class="message">Tuy rằng tui không được hoàn hảo nhưng tui sẽ cố gắng</div>
+        <div class="message">làm cho thời gian Vy ở cạnh tui trở nên ý nghĩa</div>
+        <div class="message">và không bao giờ làm điều gì khiến Vy phải buồn</div>
+        <div class="message">Tui hứa!!!!!!!!!</div>
+
+        <div id="msgYes" class="message-text" style="display: none;">Thảo Vy đồng ý nhé...💕</div>
+
+        <div class="div-buttons">
+            <button id="btnYes" style="display: none;">Okeee</button>
+            <button id="btnNo" style="display: none;">Khôngg</button>
+        </div>
+        <div class="footer">
+            From <span>Minh Duc</span>
+        </div>
+    </div>
+    <script>
+        var c = document.getElementById("c");
+var ctx = c.getContext("2d");
+
+var cw = c.width = window.innerWidth,
+    cx = cw / 2;
+var ch = c.height = window.innerHeight,
+    cy = ch / 2;
+
+var rad = Math.PI / 180;
+var stopped = true;
+var howMany = 100;
+var Circles = [];
+ctx.strokeStyle = "red";
+ctx.fillStyle = "rgb(255, 255, 255)";
+ctx.globalAlpha = .75;
+
+function Circle() {
+
+    this.R = randomIntFromInterval(50, 200);
+    this.X = randomIntFromInterval(this.R, cw - this.R);
+    this.Y = randomIntFromInterval(this.R, ch - this.R);
+    this.iX = 2 * Math.random() * (Math.random() < 0.5 ? -1 : 1); //positive or negative
+    this.iY = 2 * Math.random() * (Math.random() < 0.5 ? -1 : 1); //positive or negative
+
+    this.r = randomIntFromInterval(5, 50);
+    this.r1 = randomIntFromInterval(this.R / 2, this.R);
+
+    this.a = ~~(Math.random() * 360) + 1;
+    this.x = this.X + this.r1 * Math.cos(this.a * rad);
+    this.y = this.Y + this.r1 * Math.sin(this.a * rad);
+    this.l = randomIntFromInterval(50, 80);
+}
+
+for (var i = 0; i < howMany; i++) {
+    var circle = new Circle();
+    Circles.push(circle);
+}
+
+function Draw() {
+    ctx.fillRect(0, 0, cw, ch);
+
+    for (var i = 0; i < Circles.length; i++) {
+        var p = Circles[i];
+        if (p.X < p.R || p.X > cw - p.R || p.Y < p.R || p.Y > ch - p.R) {
+            p.iX *= -1;
+            p.iY *= -1;
+        }
+
+        p.X += p.iX;
+        p.Y += p.iY;
+        p.a += 1;
+        p.x = p.X + p.r1 * Math.cos(p.a * rad);
+        p.y = p.Y + p.r1 * Math.sin(p.a * rad);
+        p.gx = p.x + p.r * Math.cos(p.a * rad);
+        p.gy = p.y + p.r * Math.sin(p.a * rad);
+
+        /*ctx.beginPath();
+        ctx.arc(p.X,p.Y,p.R, 0,2*Math.PI);
+        ctx.stroke();*/
+        ctx.save();
+
+        ctx.fillStyle = Grd(p.gx, p.gy, p.r, p.l);
+
+        heart(p.x, p.y, p.r, p.a);
+        ctx.restore();
+    }
+    requestId = window.requestAnimationFrame(Draw);
+}
+
+function randomIntFromInterval(mn, mx) {
+    return ~~(Math.random() * (mx - mn + 1) + mn);
+}
+
+function Grd(x, y, r, l) {
+    grd = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grd.addColorStop(0, 'hsla(0, 99%,' + l + '%,.9)');
+    grd.addColorStop(1, 'hsla(0, 99%,' + l + '%, 0.1)');
+    return grd;
+}
+
+function heart(x, y, r, a) {
+
+    ctx.beginPath();
+    var x1 = x + r * Math.cos(a * rad);
+    var y1 = y + r * Math.sin(a * rad);
+    var cx1 = x + r * Math.cos((a + 22.5) * rad);
+    var cy1 = y + r * Math.sin((a + 22.5) * rad);
+
+    var cx2 = x + r * Math.cos((a - 22.5) * rad);
+    var cy2 = y + r * Math.sin((a - 22.5) * rad);
+    var chord = 2 * r * Math.sin(22.5 * rad / 2);
+
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.arc(cx1, cy1, chord, (270 + a) * rad, (270 + a + 225) * rad);
+    ctx.lineTo(x, y);
+    ctx.moveTo(x1, y1);
+    ctx.arc(cx2, cy2, chord, (90 + a) * rad, (90 + a + 135) * rad, true);
+    ctx.lineTo(x, y);
+    ctx.fill();
+}
+
+function start() {
+    requestId = window.requestAnimationFrame(Draw);
+    stopped = false;
+}
+
+function stopAnim() {
+    if (requestId) {
+        window.cancelAnimationFrame(requestId);
+    }
+    stopped = true;
+}
+
+window.addEventListener("load", start(), false);
+c.addEventListener("click", function () {
+    stopped == true ? start() : stopAnim();
+}, false);
+
+const btn = document.getElementById('btn');
+const btnYes = document.getElementById('btnYes');
+const btnNo = document.getElementById('btnNo');
+const msgYes = document.getElementById('msgYes');
+const messages = document.querySelectorAll('.message');
+const messageTitle = document.getElementById('messageTitle');
+const messageText = document.getElementById('messageText');
+
+let currentMessage = 0;
+
+btn.addEventListener('click', () => {
+    messageTitle.classList.add('hide');
+    messageText.classList.add('hide');
+    btn.classList.add('hide');
+    showNextMessage();
+});
+
+function showNextMessage() {
+    if (currentMessage < messages.length) {
+        const currentElement = messages[currentMessage];
+        currentElement.style.display = 'block';
+        currentElement.classList.add('show');
+        currentMessage++;
+
+        setTimeout(() => {
+            if (currentMessage > 0) {
+                const prevElement = messages[currentMessage - 1];
+                prevElement.classList.remove('show');
+                prevElement.style.display = 'none';
+            }
+            showNextMessage();
+        }, 3500);
+    } else {
+        msgYes.style.display = 'block';
+        msgYes.classList.add('show');
+        btnYes.style.display = 'inline-block';
+        btnNo.style.display = 'inline-block';
+    }
+}
+
+btnYes.addEventListener('click', () => {
+    window.location.href = 'messenger.html';
+});
+
+btnNo.addEventListener('click', () => {
+    moveButtonRandomly(btnNo);
+});
+
+function moveButtonRandomly(button) {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const randomX = Math.random() * (screenWidth - button.offsetWidth);
+    const randomY = Math.random() * (screenHeight - button.offsetHeight);
+
+    button.style.position = 'absolute';
+    button.style.left = `${randomX}px`;
+    button.style.top = `${randomY}px`;
+}
+    </script>
+
+</body>
+
+</html>
